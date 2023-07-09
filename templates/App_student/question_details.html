@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+{{question.title}}
+{% endblock title %}
+
+
+{% block body_block %}
+<div class="row mx-4 ">
+
+
+    <div class="col-12">
+
+        <div class="col-10">
+
+            <h1>{{question.subject}}</h1>
+
+
+            <p>{{question.description|linebreaks}} </p>
+
+            {% if question.student.full_name%}
+            <h6>Asked By :{{question.student.full_name}}</h6>
+
+
+            {% else %}
+
+            <h6>Asked By : {{question.student}}</h6>
+            {% endif %}
+            <h4>
+                <div style="border: 1px solid #ccc; padding:10px">
+                    <h5>Answars </h5>
+
+                    {% for answar in answars %}
+                    <div>
+
+                        <h4>
+
+                            {% if answar.teacher.full_name %}
+                            {{answar.teacher.full_name}}
+                            {% else %}
+                            {{answar.teacher}}
+                            {% endif %}
+
+                            : {{answar.answar}}
+
+                        </h4>
+
+                    </div>
+
+                    {% endfor %}
+                </div>
+
+            </h4>
+
+            {% if user.teacher_profile %}
+
+            <form action="" method="post">
+                {% csrf_token %}
+                {{form|crispy}}
+                <input type="submit" value="Answar" class="btn btn-success">
+            </form>
+            {% endif %}
+
+
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+</div>
+
+{% endblock body_block %}

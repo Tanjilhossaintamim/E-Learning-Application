@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block title %}
+Quiz
+{% endblock title %}
+
+{% block body_block %}
+<div class="container">
+    <h4> Your Mark: <span class="badge text-bg-dark">{{user|mark_count}}</span></h4>
+
+    {% for quiz in allquiz %}
+
+
+
+
+    <form action="{% url 'App_student:quiz_ans' pk=quiz.pk %}" method="post" class="mt-5">
+        <h4>{{forloop.counter}} .{{quiz}}
+
+            
+
+
+
+        </h4>
+        {% csrf_token %}
+
+        <input type="radio" name="answar" id="" value="{{quiz.option_1}}" required> {{quiz.option_1}}&nbsp;&nbsp;
+        <input type="radio" name="answar" id="" value="{{quiz.option_2}}" required> {{quiz.option_2}}&nbsp;&nbsp;
+        <input type="radio" name="answar" id="" value="{{quiz.option_3}}" required> {{quiz.option_3}}&nbsp;&nbsp;
+        <input type="radio" name="answar" id="" value="{{quiz.option_4}}" required> {{quiz.option_4}}<br><br>
+        <input type="submit" value="check" class="btn btn-primary">
+    </form>
+    {% endfor %}
+</div>
+{% endblock body_block %}

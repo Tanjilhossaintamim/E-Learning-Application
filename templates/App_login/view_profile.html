@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Profile
+{% endblock title %}
+
+{% block body_block %}
+<div class="container">
+
+    {% if teacher %}
+
+    {% if teacher.profile_image %}
+    <img src="{{teacher.profile_image.url}}" alt="" style="width: 300px;height:300px;border-radius:50%;margin-bottom:20px">
+
+    {% endif %}
+
+
+    <h4>Full Name :{{teacher.full_name}}</h4>
+    <h6>Date of Birth : {{teacher.date_of_birth}}</h6>
+    <h6>Subject: {{teacher.subject}}</h6>
+    <h6>Qualification : {{teacher.qualification}}</h6>
+    <h6>Phone Number : {{teacher.phone_no}}</h6>
+    <span>Joined At : {{teacher.join_date}}</span>
+    {% else %}
+
+    {% if student.profile_image %}
+    <img src="{{student.profile_image.url}}" alt=""
+        style="width: 300px;height:300px;border-radius:50%;margin-bottom:20px">
+
+    {% endif %}
+    <h4>Full Name :{{student.full_name}}</h4>
+    <h6>Date of Birth : {{student.date_of_birth}}</h6>
+    <h6>School Name : {{student.school_name}}</h6>
+    <h6>Class : {{student.your_class}}</h6>
+    <h6>Phone Number : {{student.phone_no}}</h6>
+    <span>Joined At : {{student.join_date}}</span>
+
+    {% endif %}
+    <br><br>
+    <a href="{% url 'App_login:profile'%}" class="btn btn-primary">Update Profile</a>
+
+</div>
+
+{% endblock body_block %}

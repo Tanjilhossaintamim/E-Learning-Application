@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{article.title}}
+{% endblock title %}
+
+
+{% block body_block %}
+<div class="row mx-4 ">
+
+
+        <div class="col-12">
+
+            <div class="col-10">
+
+                <h1>{{article.title}}</h1>
+                {% if article.image %}
+                <div class="col-2">
+                    <img src="{{article.image.url}}" alt="" width="400px" height="400px">
+                </div>
+
+                {% endif %}
+                <p>{{article.description|linebreaks}} </p>
+                <h4>Published By :
+                    {% if article.author.full_name %}
+                    {{article.author.full_name}}
+                    {% else %}
+                    {{article.author}}
+                    {% endif %}
+
+                </h4>
+                <h6>Published Date: {{article.published_at}}</h6>
+            </div>
+
+        </div>
+
+
+
+</div>
+
+
+
+</div>
+
+{% endblock body_block %}

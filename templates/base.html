@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+
+        {% block title %}
+
+        {% endblock title %}
+
+    </title>
+    <link rel="shortcut icon" href="{% static 'images/icons8-e-learning-64.png' %}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+</head>
+
+<body>
+    <nav>
+        <div class="app_logo">
+            <img src="{% static 'images/icons8-e-learning-64.png' %}" alt="logo">
+            <p>E Learning </p>
+        </div>
+        <div class="all_links">
+            <ul>
+                <li><a href="{% url 'App_student:home'%}">Home</a></li>
+                <li><a href="{% url 'App_student:quiz'%}">Quiz</a></li>
+                {% if user.student_profile %}
+                <li><a href="{% url 'App_student:ask_question'%}">Ask Question</a></li>
+                {% endif %}
+
+                {% if user.teacher_profile %}
+                <li><a href="{% url 'App_teacher:post_quiz' %}">Add Quiz</a></li>
+                <li><a href="{% url 'App_teacher:write_article' %}">Post Article</a></li>
+                <li><a href="{% url 'App_teacher:my_article' %}">My Article</a></li>
+
+
+                {% endif %}
+
+                <li><a href="{% url 'App_student:forum' %}">Forum</a></li>
+
+                {% if user.is_authenticated %}
+
+                <li><a href="{% url 'App_login:view_profile' %}">Profile</a></li>
+                {% endif %}
+
+            </ul>
+        </div>
+        <div class="join">
+
+            {% if user.is_authenticated %}
+            <a href="{% url 'App_login:logout' %}">Logout</a>
+            {% else %}
+
+            <a href="{% url 'App_login:login' %}">Login</a>
+            {% endif %}
+
+
+        </div>
+    </nav>
+    <div class="container mt-5">
+
+        {% if messages %}
+
+        {% for message in messages %}
+
+        <div {% if message.tags %} class="alert alert-{{message.tags}}" {% endif %} role="alert" id="message">
+            {{message}}
+
+        </div>
+
+        {% endfor %}
+
+
+        {% endif %}
+
+    </div>
+
+    {% block body_block %}
+
+    {% endblock body_block %}
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+
+
+    <script src="{% static 'js/script.js' %}"></script>
+
+</body>
+
+</html>

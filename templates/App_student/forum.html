@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+
+{% block title %}
+Forum
+{% endblock title %}
+
+{% block body_block %}
+
+
+<div class="row mx-4 ">
+
+    {% for question in allquestion %}
+
+    <div class="col-12 article">
+        <div class="row">
+            <div class="col-10">
+
+                <h2>{{forloop.counter}}. {{question.subject}}</h2>
+                <p>{{question.description|range_filter}} <a
+                        href="{% url 'App_student:question_details' pk=question.pk%}" class="text-decoration-none">see
+                        more</a></p>
+                <h6>Asked By : {{question.student.full_name}}</h6>
+
+
+            </div>
+
+        </div>
+
+
+        {% endfor %}
+    </div>
+
+
+
+    {% endblock body_block %}
