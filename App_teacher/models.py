@@ -4,9 +4,22 @@ from django.conf import settings
 # Create your models here.
 
 
+class Catagory(models.Model):
+    name = models.CharField(max_length=255)
+    create_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'catagories'
+
+
 class Articale(models.Model):
     author = models.ForeignKey(
         TeacherProfile, on_delete=models.CASCADE, related_name='writer')
+    catagory = models.ForeignKey(
+        Catagory, on_delete=models.CASCADE, related_name='articale_catagori')
     image = models.ImageField(upload_to='article_image', null=True, blank=True)
     title = models.CharField(max_length=300)
     description = models.TextField()

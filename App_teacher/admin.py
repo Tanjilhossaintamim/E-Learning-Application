@@ -1,7 +1,15 @@
 from django.contrib import admin
-from .models import Articale, Quiz, QuizAnswar
+from .models import Articale, Quiz, QuizAnswar, Catagory
 
 # Register your models here.
+
+
+@admin.register(Catagory)
+class CatagoryAdmin(admin.ModelAdmin):
+    '''Admin View for Catagory'''
+
+    list_display = ('id', 'name', 'create_at')
+    list_per_page = 10
 
 
 @admin.register(Articale)
